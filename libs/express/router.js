@@ -1,5 +1,6 @@
 var config = require('config');
 var express = require('express');
+var middleware = require('./middleware');
 var ensureUser = require('connect-ensure-login');
 var ensureLoggedIn = ensureUser.ensureLoggedIn;
 var ensureNotLoggedIn = ensureUser.ensureNotLoggedIn;
@@ -92,6 +93,23 @@ exports.init = function (app) {
   events.route('/:eventId').get(controller.v1.event.fidnById);
   apiV1.use('/events', events);
   //endregion
+  //region Applications
+  var apps = express.Router();
+  apps.route('/')
+    .get(middleware.auth(),controller.v1.application.list)
+    .post(middleware.auth(),controller.v1.application.insert);
+  apps.route('/:applicationId')
+    .get(middleware.auth(),controller.v1.application.findById)
+    .delete(middleware.auth(),controller.v1.application.remove);
+  apps.route('/:applicationId/simpleapikeys')
+    .get(middleware.auth(),controller.v1.application.listKeys)
+    .post(middleware.auth(),controller.v1.application.addKey);
+  apps.route('/:applicationId/consumers')
+    .get(middleware.auth(),controller.v1.application.listConsumers)
+    .post(middleware.auth(),controller.v1.application.addConsumer);
+  apiV1.use('/applications', apps);
+  //endregion
+
   //endregion
 
   //region API 2
