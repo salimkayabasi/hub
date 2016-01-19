@@ -1,3 +1,9 @@
 {
-    "directory": "app/bower_components"
+  "analytics": false,
+  "directory": ".bower/bower",
+  "storage": {
+    "packages": ".bower/cache",
+    "registry": ".bower/registry"
+  },
+  "tmp": ".bower/tmp"
 }
