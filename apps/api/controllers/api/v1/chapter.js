@@ -4,6 +4,8 @@ var utils = require(process.cwd() + '/libs/mongoose/util');
 exports.findById = utils.getModel('Chapter', {_id: 'chapterId'}, [['country', 'name']], true);
 exports.list = utils.getModel('Chapter', {}, [['country', 'name']]);
 exports.byCountry = utils.getModel('Chapter', {country: 'country'}, [['country', 'name']]);
+exports.posts = utils.getModel('PlusPost', {chapter: 'chapterId'});
+exports.postsByTag = utils.getModel('PlusPost', {chapter: 'chapterId',hashtags: 'hashtags'});
 exports.nearBy = function (req, res) {
   if (!req.params.lat || !req.params.lng) {
     return res.send(500, 'Please specify lat and lng');
