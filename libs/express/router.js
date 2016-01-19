@@ -41,6 +41,12 @@ exports.init = function (app) {
   posts.route('/hashtag/:hashtags').get(controller.v1.pluspost.byTag);
   apiV1.use('/plus/posts', posts);
   //endregion
+  // region Tags
+  var tags = express.Router();
+  tags.route('/').get(controller.v1.tag.list);
+  tags.route('/tagId').get(controller.v1.tag.findById);
+  apiV1.use('/tags', tags);
+  //endregion
   //endregion
 
   //region API 2
