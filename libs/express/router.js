@@ -1,9 +1,6 @@
 var config = require('config');
 var express = require('express');
 var middleware = require('./middleware');
-var ensureUser = require('connect-ensure-login');
-var ensureLoggedIn = ensureUser.ensureLoggedIn;
-var ensureNotLoggedIn = ensureUser.ensureNotLoggedIn;
 
 var apiV1PreFix = config.app.api.apiV1PreFix;
 var apiV2PreFix = config.app.api.apiV2PreFix;
@@ -96,29 +93,42 @@ exports.init = function (app) {
   //region Applications
   var apps = express.Router();
   apps.route('/')
-    .get(middleware.auth(),controller.v1.application.list)
-    .post(middleware.auth(),controller.v1.application.insert);
+    .get(middleware.auth(), controller.v1.application.list)
+    .post(middleware.auth(), controller.v1.application.insert);
   apps.route('/:applicationId')
-    .get(middleware.auth(),controller.v1.application.findById)
-    .delete(middleware.auth(),controller.v1.application.remove);
+    .get(middleware.auth(), controller.v1.application.findById)
+    .delete(middleware.auth(), controller.v1.application.remove);
   apps.route('/:applicationId/simpleapikeys')
-    .get(middleware.auth(),controller.v1.application.listKeys)
-    .post(middleware.auth(),controller.v1.application.addKey);
+    .get(middleware.auth(), controller.v1.application.listKeys)
+    .post(middleware.auth(), controller.v1.application.addKey);
   apps.route('/:applicationId/consumers')
-    .get(middleware.auth(),controller.v1.application.listConsumers)
-    .post(middleware.auth(),controller.v1.application.addConsumer);
+    .get(middleware.auth(), controller.v1.application.listConsumers)
+    .post(middleware.auth(), controller.v1.application.addConsumer);
   apiV1.use('/applications', apps);
   //endregion
   //region Frisbee
   var frisbeeApp = express.Router();
   frisbeeApp.route('/user/home')
-    .put(middleware.frisbee,controller.v1.frisbee.setHome);
+    .put(middleware.frisbee, controller.v1.frisbee.setHome);
   frisbeeApp.route('/gcm/register')
-    .post(middleware.frisbee,controller.v1.frisbee.gcmRegister);
+    .post(middleware.frisbee, controller.v1.frisbee.gcmRegister);
   frisbeeApp.route('/gcm/unregister')
-    .post(middleware.frisbee,controller.v1.frisbee.gcmUnregister);
-
+    .post(middleware.frisbee, controller.v1.frisbee.gcmUnregister);
   apiV1.use('/frisbee', frisbeeApp);
+  //endregion
+  //region Admin
+  var admins = express.Router();
+  admins.route('/tasks')
+    .post(middleware.isAdmin, controller.v1.admin.runTasks);
+  admins.route('/tasks/cluster')
+    .post(middleware.isAdmin, controller.v1.admin.getCluster);
+  admins.route('/metrics/fix')
+    .post(middleware.isAdmin, controller.v1.admin.fixMetrics);
+  admins.route('/cache/flush')
+    .post(middleware.isAdmin, controller.v1.admin.flushCache);
+  admins.route('/prerender/flush')
+    .post(middleware.isAdmin, controller.v1.admin.preRenderFlush);
+  apiV1.use('/admin', admins);
   //endregion
 
   //endregion

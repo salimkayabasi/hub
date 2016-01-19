@@ -1,7 +1,7 @@
 var passport = require('passport');
 var express = require('express');
 
-exports.auth = function (options) {
+var auth = exports.auth = function (options) {
   options = options || {};
   var allowSession = options.allowSession ? options.allowSession : false;
   var allowOauthConsumer = options.allowOauthConsumer ? options.allowOauthConsumer : false;
@@ -59,3 +59,4 @@ exports.auth = function (options) {
   };
 };
 exports.frisbee = passport.authenticate('bearer-frisbee', {session: false});
+exports.isAdmin = auth({roles: ['admin']});
