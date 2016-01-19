@@ -47,6 +47,12 @@ exports.init = function (app) {
   tags.route('/tagId').get(controller.v1.tag.findById);
   apiV1.use('/tags', tags);
   //endregion
+  //region Documentation
+  var doc = express.Router();
+  doc.route('/').get(controller.v1.documentation.index);
+  apiV1.use('/rest', doc);
+
+  //endregion
   //endregion
 
   //region API 2
