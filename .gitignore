@@ -3,6 +3,7 @@ node_modules
 public
 .tmp
 .sass-cache
+/config/runtime.json
 app/bower_components
 heroku
 /views
