@@ -16,16 +16,18 @@ exports.init = function (app) {
   var apiV2 = express.Router();
   var router = express.Router();
 
-
   //region API v1
   //region Chapters
   var chapters = express.Router();
   chapters.route('/').get(controller.v1.chapter.list);
   chapters.route('/country/:country').get(controller.v1.chapter.byCountry);
+  chapters.route('/:chapterId/posts').get(controller.v1.chapter.posts);
+  chapters.route('/chapters/:chapterId/posts/:hashtags').get(controller.v1.chapter.postsByTag);
   chapters.route('/near/:lat/:lng/:maxDistance').get(controller.v1.chapter.nearBy);
   chapters.route('/:chapterId').get(controller.v1.chapter.findById);
   apiV1.use('/chapters', chapters);
   //endregion
+  //region GDE
   var gdes = express.Router();
   gdes.route('/').get(controller.v1.gde.list);
   gdes.route('/products').get(controller.v1.gde.products);
@@ -33,6 +35,12 @@ exports.init = function (app) {
   gdes.route('/country/:country').get(controller.v1.gde.byCountry);
   gdes.route('/:gdeId').get(controller.v1.gde.findById);
   apiV1.use('/gdes', gdes);
+  //endregion
+  // region PlusPosts
+  var posts = express.Router();
+  posts.route('/hashtag/:hashtags').get(controller.v1.pluspost.byTag);
+  apiV1.use('/plus/posts', posts);
+  //endregion
   //endregion
 
   //region API 2
