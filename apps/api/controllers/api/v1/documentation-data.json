@@ -6,7 +6,7 @@
   "description": "Everything GDG",
   "ownerDomain": "hub.gdgx.io",
   "baseUrl": "https://hub.gdgx.io/api/v1/",
-  "status": "alpha",
+  "status": "deprecated",
   "ownerName": "GDG[x]",
   "resources": {
     "url": {
