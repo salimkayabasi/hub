@@ -51,7 +51,11 @@ exports.init = function (app) {
   var doc = express.Router();
   doc.route('/').get(controller.v1.documentation.index);
   apiV1.use('/rest', doc);
-
+  //endregion
+  //region Organizer
+  var organizers = express.Router();
+  organizers.route('/:gplusId').get(controller.v1.organizer.findById);
+  apiV1.use('/organizer', organizers);
   //endregion
   //endregion
 
