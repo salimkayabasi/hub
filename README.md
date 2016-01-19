@@ -4,6 +4,8 @@ GDG[x] Hub
 [![Join the chat at https://gitter.im/gdg-x/hub](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gdg-x/hub?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Build Status](https://travis-ci.org/gdg-x/hub.png?branch=master)](https://travis-ci.org/gdg-x/hub)
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+THIS PROJECT IS IN HARD DEVELOPMENT AND BIG CHANGES MAY HAPPEN
 
 The public instance of the GDG[x] Hub is hosted at [https://hub.gdgx.io]
 
