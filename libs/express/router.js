@@ -24,6 +24,14 @@ exports.init = function (app) {
   chapters.route('/:chapterId/posts').get(controller.v1.chapter.posts);
   chapters.route('/chapters/:chapterId/posts/:hashtags').get(controller.v1.chapter.postsByTag);
   chapters.route('/near/:lat/:lng/:maxDistance').get(controller.v1.chapter.nearBy);
+  chapters.route('/:chapterId/events').get(controller.v1.chapter.events);
+  chapters.route('/:chapterId/events/upcoming').get(controller.v1.chapter.eventsUpcoming);
+  chapters.route('/:chapterId/events/past').get(controller.v1.chapter.eventsPast);
+  chapters.route('/:chapterId/events/month').get(controller.v1.chapter.eventsThisMonth);
+  chapters.route('/:chapterId/events/year/:year/:month').get(controller.v1.chapter.eventsByMonth);
+  chapters.route('/:chapterId/events/:start/:end').get(controller.v1.chapter.eventsByDate);
+  chapters.route('/:chapterId/events/tag/:tag').get(controller.v1.chapter.eventsByTag);
+  chapters.route('/:chapterId/events/stats').get(controller.v1.chapter.eventsByStats);
   chapters.route('/:chapterId').get(controller.v1.chapter.findById);
   apiV1.use('/chapters', chapters);
   //endregion
@@ -62,6 +70,27 @@ exports.init = function (app) {
   metrics.route('/types').get(controller.v1.metric.byType);
   metrics.route('/daily/:subject/:metric/:year/:month').get(controller.v1.metric.daily);
   apiV1.use('/metrics', metrics);
+  //endregion
+  //region Events
+  var events = express.Router();
+  events.route('/').get(controller.v1.event.list);
+  events.route('/past').get(controller.v1.event.past);
+  events.route('/upcoming').get(controller.v1.event.upcoming);
+  events.route('/upcoming').get(controller.v1.event.upcoming);
+  events.route('/today').get(controller.v1.event.today);
+  events.route('/now').get(controller.v1.event.now);
+  events.route('/stats').get(controller.v1.event.byStats);
+  events.route('/:eventId/near').get(controller.v1.event.nearByEventsOfEvent);
+  events.route('/near/:lat/:lng/:maxDistance').get(controller.v1.event.nearByEvents);
+  events.route('/year/:year').get(controller.v1.event.byYear);
+  events.route('/year/:year/:month').get(controller.v1.event.byMonth);
+  events.route('/tags').get(controller.v1.event.tags);
+  events.route('/tag/:tag').get(controller.v1.event.byTag);
+  events.route('/tag/:tag/upcoming').get(controller.v1.event.byTagUpcoming);
+  events.route('/tag/:tag/:start/:end').get(controller.v1.event.byTagDate);
+  events.route('/:start/:end').get(controller.v1.event.byDate);
+  events.route('/:eventId').get(controller.v1.event.fidnById);
+  apiV1.use('/events', events);
   //endregion
   //endregion
 
