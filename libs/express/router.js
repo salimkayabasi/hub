@@ -57,6 +57,12 @@ exports.init = function (app) {
   organizers.route('/:gplusId').get(controller.v1.organizer.findById);
   apiV1.use('/organizer', organizers);
   //endregion
+  //region Metrics
+  var metrics = express.Router();
+  metrics.route('/types').get(controller.v1.metric.byType);
+  metrics.route('/daily/:subject/:metric/:year/:month').get(controller.v1.metric.daily);
+  apiV1.use('/metrics', metrics);
+  //endregion
   //endregion
 
   //region API 2
