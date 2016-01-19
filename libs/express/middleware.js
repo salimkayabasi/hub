@@ -58,3 +58,4 @@ exports.auth = function (options) {
     }
   };
 };
+exports.frisbee = passport.authenticate('bearer-frisbee', {session: false});

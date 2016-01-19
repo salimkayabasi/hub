@@ -109,6 +109,17 @@ exports.init = function (app) {
     .post(middleware.auth(),controller.v1.application.addConsumer);
   apiV1.use('/applications', apps);
   //endregion
+  //region Frisbee
+  var frisbeeApp = express.Router();
+  frisbeeApp.route('/user/home')
+    .put(middleware.frisbee,controller.v1.frisbee.setHome);
+  frisbeeApp.route('/gcm/register')
+    .post(middleware.frisbee,controller.v1.frisbee.gcmRegister);
+  frisbeeApp.route('/gcm/unregister')
+    .post(middleware.frisbee,controller.v1.frisbee.gcmUnregister);
+
+  apiV1.use('/frisbee', frisbeeApp);
+  //endregion
 
   //endregion
 
