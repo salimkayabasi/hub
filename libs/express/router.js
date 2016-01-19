@@ -145,6 +145,7 @@ exports.init = function (app) {
   //region Web UI
   router.route('/partials/*').get(controller.web.partials);
   router.route('/directives/*').get(controller.web.partials);
+  router.route('/signin').post(controller.auth.signin);
   router.route('*').get(controller.web.home);
   //endregion
 

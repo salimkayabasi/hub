@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var config = require('config');
 var DailyMetric = mongoose.model('DailyMetric');
 var moment = require('moment');
+var risky = require(process.cwd() + '/lib/risky');
 
 exports.runTasks = function (req, res) {
   // jshint -W106
