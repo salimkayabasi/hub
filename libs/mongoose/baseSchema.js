@@ -54,7 +54,11 @@ baseSchema.pre('save', function (next) {
       if (err) {
         return next(err);
       }
-      self.no = counter.count;
+      var count = 1;
+      if (!counter) {
+        count = counter.count;
+      }
+      self.no = count;
       return next();
     });
 });

@@ -19,7 +19,12 @@ module.exports = {
       hostname: process.env.OPENSHIFT_NODEJS_IP
     },
     cron: {
-      enabled: process.env.CRON_ENABLED
+      enabled: process.env.CRON_ENABLED,
+      dailyTime: '0 0 0 0 * *',
+      hourlyTime: '0 0 * * * *',
+      every5MinTime: '0 */5 * * * *',
+      every15MinTime: '0 */15 * * * *',
+      autoStart: process.env.CRON_AUTO_START
     }
   },
   mail: {

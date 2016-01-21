@@ -1,32 +1,12 @@
-'use strict';
+var mongoose = require('mongoose');
+var baseSchema = require('../libs/mongoose/baseSchema');
 
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
-
-// jshint -W106
-var GdeSchema = new Schema({
-  _id: String,
-  name: String,
-  location: String,
-  country: {type: String, ref: 'Country'},
-  geo: {lng: Number, lat: Number},
-  email: String,
-  products: [String],
-  product_codes: [String],
-  active: Boolean,
-  created_at: Date,
-  updated_at: Date
+var GdeSchema = baseSchema.extend({
+  name: {type: String, trim: true},
+  img: {type: String, trim: true},
+  location: {type: String, trim: true},
+  role: {type: String, trim: true},
+  skills: {type: String, trim: true},
+  url: {type: String, trim: true}
 });
-
-GdeSchema.pre('save', function (next) {
-  this.updated_at = new Date();
-  if (!this.created_at) {
-    this.created_at = new Date();
-  }
-  next();
-});
-// jshint +W106
-
-GdeSchema.index({geo: '2dsphere'});
-
 mongoose.model('Gde', GdeSchema);

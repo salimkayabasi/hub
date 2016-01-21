@@ -39,7 +39,7 @@
     "mongoose": "4.3.6",
     "mongoose-schema-extend": "^0.2.0",
     "morgan": "^1.6.1",
-    "newrelic": "1.24.1",
+    "newrelic": "1.25.0",
     "node-forge": "^0.6.38",
     "node-geocoder": "3.6.2",
     "node-phantom": "0.2.5",
@@ -55,7 +55,7 @@
     "shortid": "^2.2.4",
     "slugify": "0.1.1",
     "socket.io": "1.4.4",
-    "superagent": "1.7.0",
+    "superagent": "1.7.1",
     "superagent-retry": "0.5.1",
     "timequeue": "0.2.2",
     "winston": "^2.1.1"

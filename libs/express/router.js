@@ -140,6 +140,12 @@ exports.init = function (app) {
   chapter.route('/:id').get(controller.v2.chapter.findById);
   apiV2.use('/chapter', chapter);
   //endregion
+  //region GDE
+  var gde = express.Router();
+  gde.route('/').get(controller.v2.gde.list);
+  gde.route('/:id').get(controller.v2.gde.findById);
+  apiV2.use('/gde', gde);
+  //endregion
   //endregion
 
   //region Web UI

@@ -2,6 +2,14 @@
   "app": {
     "api": {
       "enabled": true
+    },
+    "cron": {
+      "enabled": true,
+      "dailyTime": "0 * * * * *",
+      "hourlyTime": "0 0 * * * *",
+      "every5MinTime": "0 */5 * * * *",
+      "every15MinTime": "0 */15 * * * *",
+      "autoStart": true
     }
   }
 }
