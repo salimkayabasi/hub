@@ -1,12 +1,12 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Chapter = mongoose.model('Chapter'),
-    Event = mongoose.model('Event'),
-    DailyMetric = mongoose.model('DailyMetric'),
-    moment = require('moment'),
-    async = require('async'),
-    utils = require('../../libs/utils');
+  Chapter = mongoose.model('Chapter'),
+  Event = mongoose.model('Event'),
+  DailyMetric = mongoose.model('DailyMetric'),
+  moment = require('moment'),
+  async = require('async'),
+  utils = require('../../libs/utils');
 
 module.exports = function (id, params, cb) {
   async.series([
@@ -38,7 +38,11 @@ module.exports = function (id, params, cb) {
       );
     },
     function (callback) {
-      DailyMetric.find({type: 'plusOneCount', year: moment().year(), month: moment().subtract(1, 'months').month()},
+      DailyMetric.find({
+          type: 'plusOneCount',
+          year: moment().year(),
+          month: moment().subtract(1, 'months').month()
+        },
         function (err, metrics) {
           async.each(metrics,
             function (metric) {
@@ -52,7 +56,11 @@ module.exports = function (id, params, cb) {
       );
     },
     function (callback) {
-      DailyMetric.find({type: 'circledByCount', year: moment().year(), month: moment().subtract(1, 'months').month()},
+      DailyMetric.find({
+          type: 'circledByCount',
+          year: moment().year(),
+          month: moment().subtract(1, 'months').month()
+        },
         function (err, metrics) {
           async.each(metrics,
             function (metric) {
@@ -104,7 +112,7 @@ module.exports = function (id, params, cb) {
       };
 
       Chapter.aggregate([
-        { $match: {} },
+        {$match: {}},
         {
           $group: {
             /* execute 'grouping' */

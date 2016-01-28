@@ -55,7 +55,7 @@ baseSchema.pre('save', function (next) {
         return next(err);
       }
       var count = 1;
-      if (!counter) {
+      if (counter) {
         count = counter.count;
       }
       self.no = count;

@@ -55,23 +55,35 @@ module.exports = function (id, params, cb) {
     function (callback) {
       Event.count({})
         .or([
-          {start: {'$gte': moment().startOf('day').toDate()}, end: {'$lt': moment().endOf('day').toDate()}}, //Starts ends today
+          {
+            start: {'$gte': moment().startOf('day').toDate()},
+            end: {'$lt': moment().endOf('day').toDate()}
+          }, //Starts ends today
           {
             start: {'$lt': moment().startOf('day').toDate()},
-            end: {'$lt': moment().endOf('day').toDate(), '$gt': moment().startOf('day').toDate()}
+            end: {
+              '$lt': moment().endOf('day').toDate(),
+              '$gt': moment().startOf('day').toDate()
+            }
           }, // Started yesterday ends today
           {
-            start: {'$gte': moment().startOf('day').toDate(), '$lt': moment().endOf('day').toDate()},
+            start: {
+              '$gte': moment().startOf('day').toDate(),
+              '$lt': moment().endOf('day').toDate()
+            },
             end: {'$gt': moment().endOf('day').toDate()}
           }, // Starts today ends tomorrow
-          {start: {'$lt': moment().startOf('day').toDate()}, end: {'$gt': moment().endOf('day').toDate()}} // Started yesterday ends tomorrow
+          {
+            start: {'$lt': moment().startOf('day').toDate()},
+            end: {'$gt': moment().endOf('day').toDate()}
+          } // Started yesterday ends tomorrow
         ])
         .exec(
-        function (err, count) {
-          utils.recordDailyMetric('global', 'Global', 'eventCount', count);
-          callback(err, 'eventCount');
-        }
-      );
+          function (err, count) {
+            utils.recordDailyMetric('global', 'Global', 'eventCount', count);
+            callback(err, 'eventCount');
+          }
+        );
     },
     function (callback) {
       // Per-Country Metrics
@@ -99,13 +111,22 @@ module.exports = function (id, params, cb) {
                         }, //Starts ends today
                         {
                           start: {'$lt': moment().startOf('day').toDate()},
-                          end: {'$lt': moment().endOf('day').toDate(), '$gt': moment().startOf('day').toDate()}
+                          end: {
+                            '$lt': moment().endOf('day').toDate(),
+                            '$gt': moment().startOf('day').toDate()
+                          }
                         }, // Started yesterday ends today
                         {
-                          start: {'$gte': moment().startOf('day').toDate(), '$lt': moment().endOf('day').toDate()},
+                          start: {
+                            '$gte': moment().startOf('day').toDate(),
+                            '$lt': moment().endOf('day').toDate()
+                          },
                           end: {'$gt': moment().endOf('day').toDate()}
                         }, // Starts today ends tomorrow
-                        {start: {'$lt': moment().startOf('day').toDate()}, end: {'$gt': moment().endOf('day').toDate()}} // Started yesterday ends tomorrow
+                        {
+                          start: {'$lt': moment().startOf('day').toDate()},
+                          end: {'$gt': moment().endOf('day').toDate()}
+                        } // Started yesterday ends tomorrow
                       ]
                     },
                     function (err, count) {

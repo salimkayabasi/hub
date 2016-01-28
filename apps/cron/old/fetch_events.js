@@ -1,13 +1,13 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    request = require('superagent'),
-    Chapter = mongoose.model('Chapter'),
-    Tag = mongoose.model('Tag'),
-    Event = mongoose.model('Event'),
-    moment = require('moment'),
-    async = require('async'),
-    devsite = require('../clients/devsite');
+  request = require('superagent'),
+  Chapter = mongoose.model('Chapter'),
+  Tag = mongoose.model('Tag'),
+  Event = mongoose.model('Event'),
+  moment = require('moment'),
+  async = require('async'),
+  devsite = require('../clients/devsite');
 
 require('superagent-retry')(request);
 
@@ -32,33 +32,33 @@ module.exports = function (id, params, cb) {
           devsite.fetchEventsForChapter(firstDayOfMonth, lastDayOfMonth, chapter._id, function (err, events) {
             if (events) {
               request.get('https://developers.google.com/events/feed/json?group=' + chapter._id + '&start=' +
-                          firstDayOfMonth + '&end=' + lastDayOfMonth)
+                  firstDayOfMonth + '&end=' + lastDayOfMonth)
                 .retry(5).end(function (err, res) {
 
-                  if (err || !res) {
-                    console.log('error fetching events');
-                    chapterCallback(err);
-                  } else {
-                    if (events.length !== res.body.length) {
-                      console.log('chapter ' + chapter.name);
-                      console.log('client says there are: ' + events.length + ' events');
-                      console.log('devsite has ' + res.body.length || 0 + ' events');
-                      console.log('EVENT COUNT MISMATCH!!!');
-                    }
-
-                    async.each(events, function (event, eventsCallback) {
-                      var upsertData = event.toObject();
-                      delete upsertData._id;
-
-                      Event.update({_id: event._id}, upsertData, { upsert: true }, function (err) {
-                        eventsCallback(err);
-                      });
-                    }, function (err) {
-                      console.log('[task ' + id + '] saved ' + events.length + ' events');
-                      chapterCallback(err);
-                    });
+                if (err || !res) {
+                  console.log('error fetching events');
+                  chapterCallback(err);
+                } else {
+                  if (events.length !== res.body.length) {
+                    console.log('chapter ' + chapter.name);
+                    console.log('client says there are: ' + events.length + ' events');
+                    console.log('devsite has ' + res.body.length || 0 + ' events');
+                    console.log('EVENT COUNT MISMATCH!!!');
                   }
-                });
+
+                  async.each(events, function (event, eventsCallback) {
+                    var upsertData = event.toObject();
+                    delete upsertData._id;
+
+                    Event.update({_id: event._id}, upsertData, {upsert: true}, function (err) {
+                      eventsCallback(err);
+                    });
+                  }, function (err) {
+                    console.log('[task ' + id + '] saved ' + events.length + ' events');
+                    chapterCallback(err);
+                  });
+                }
+              });
             } else {
               chapterCallback(null);
             }
@@ -114,8 +114,8 @@ module.exports = function (id, params, cb) {
                 _id: tag.id,
                 title: tag.title
               }).save(function () {
-                  devsite.fetchTaggedEvents(tag.id, month, year, processTag.bind(this, tag.id, tagCallback));
-                });
+                devsite.fetchTaggedEvents(tag.id, month, year, processTag.bind(this, tag.id, tagCallback));
+              });
             } else {
               devsite.fetchTaggedEvents(tag.id, month, year, processTag.bind(this, tag.id, tagCallback));
             }

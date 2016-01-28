@@ -56,8 +56,11 @@ exports.paging = function (Model, req, res, next, query, select, populate) {
     .select(select || '')
     .populate(populate || '')
     .sort(req.query.sort)
-    .skip(req.query.skip)
-    .limit(req.query.limit);
+    .skip(req.query.skip);
+
+  if (req.query.limit > 0) {
+    q.limit(req.query.limit);
+  }
 
   q.exec(function (err, result) {
     if (err) {

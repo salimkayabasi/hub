@@ -2,18 +2,24 @@ var mongoose = require('mongoose');
 var baseSchema = require('../libs/mongoose/baseSchema');
 
 var ChapterSchema = baseSchema.extend({
-  _id: String,
-  name: String,
-  city: String,
-  state: String,
-  country: {type: String, ref: 'Country'},
-  geo: {lng: Number, lat: Number},
-  group_type: String,
-  status: String,
-  site: String,
-  organizers: [{type: String, ref: 'User'}]
+  _id: {type: String},
+  name: {type: String},
+  city: {type: String},
+  state: {type: String},
+  country: {type: String},
+  geo: {
+    type: [Number],  // [<longitude>, <latitude>]
+    index: '2d'      // create the geospatial index
+  },
+  group_type: {type: String},
+  status: {type: String},
+  site: {type: String},
+  organizers: [{
+    _id: false,
+    name: {type: String},
+    'gplus_url': {type: String},
+    photo: {type: String}
+  }]
 });
-
-ChapterSchema.index({geo: '2dsphere'});
 
 mongoose.model('Chapter', ChapterSchema);

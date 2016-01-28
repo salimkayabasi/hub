@@ -11,9 +11,11 @@ var newCron = function (task, cronTime) {
   }).start();
 };
 
-module.exports.init = function (cb) {
+exports.init = function (cb) {
   if (config.app.cron.enabled) {
+    log.info('Cron app started');
     newCron(tasks.gde, config.app.cron.dailyTime);
+    newCron(tasks.chapter, config.app.cron.dailyTime);
   }
   if (cb) {
     cb();

@@ -51,6 +51,7 @@
     "passport-localapikey": "0.0.3",
     "phantomjs": "1.9.19",
     "redis": "2.4.2",
+    "request": "^2.69.0",
     "response-time": "^2.3.1",
     "shortid": "^2.2.4",
     "slugify": "0.1.1",

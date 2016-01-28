@@ -7,10 +7,10 @@ exports.id = function (req, res, next) {
 };
 
 exports.json = function (req, res, next) {
-  var asc = req.query.asc === 'true' ? '-' : '';
+  var asc = req.query.asc === 'true' ? '' : '-';
   req.query.sort = asc + (req.query.sort || 'no');
   var page = req.query.page || 1;
-  req.query.limit = config.paging.size;
+  req.query.limit = req.query.limit || config.paging.size;
   req.query.skip = (page - 1) * req.query.limit;
   delete req.query.page;
   delete req.query.asc;
