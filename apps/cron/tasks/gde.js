@@ -16,9 +16,6 @@ var whoIsThis = function (person, cb) {
   gde.role = $('.person-role').text();
   gde.skills = $('.person-skills').text();
   gde.url = $('a').attr('href');
-  if (gde.name === 'Salim KAYABASI') {
-    log.info(gde.name);
-  }
   GDE.findOne({name: gde.name})
     .exec(function (err, result) {
       if (err) {
