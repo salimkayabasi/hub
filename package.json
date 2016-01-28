@@ -3,6 +3,7 @@
   "description": "APIs for everything GDG",
   "homepage": "http://hub.gdgx.io",
   "license": "Apache-2.0",
+  "main": "server.js",
   "keywords": [
     "gdg",
     "hub",
@@ -16,30 +17,30 @@
   "bugs": {
     "url": "https://github.com/gdg-x/hub/issues"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": {
     "async": "^1.5.2",
     "body-parser": "^1.14.2",
     "burrito": "0.2.12",
     "cheerio": "0.19.0",
-    "compression": "^1.6.0",
+    "compression": "^1.6.1",
     "config": "^1.19.0",
     "connect-mongo": "^1.1.0",
     "connect-redis": "3.0.2",
     "cron": "1.1.0",
-    "ejs": "2.3.4",
-    "express": "4.13.3",
+    "ejs": "2.4.1",
+    "express": "4.13.4",
     "express-rate": "0.0.1",
     "express-session": "1.13.0",
     "google-auth-library": "^0.9.7",
-    "google-oauth-jwt": "0.1.7",
+    "google-oauth-jwt": "0.2.0",
     "googleapis": "2.1.7",
-    "lodash": "4.0.0",
+    "lodash": "4.0.1",
     "moment": "2.11.1",
-    "mongoose": "4.3.6",
+    "mongoose": "4.3.7",
     "mongoose-schema-extend": "^0.2.0",
     "morgan": "^1.6.1",
-    "newrelic": "1.25.0",
+    "newrelic": "1.25.1",
     "node-forge": "^0.6.38",
     "node-geocoder": "3.6.2",
     "node-phantom": "0.2.5",
@@ -49,20 +50,20 @@
     "passport-http-bearer": "1.0.1",
     "passport-http-oauth": "0.1.3",
     "passport-localapikey": "0.0.3",
-    "phantomjs": "1.9.19",
+    "phantomjs": "2.1.3",
     "redis": "2.4.2",
     "request": "^2.69.0",
     "response-time": "^2.3.1",
     "shortid": "^2.2.4",
     "slugify": "0.1.1",
-    "socket.io": "1.4.4",
-    "superagent": "1.7.1",
+    "socket.io": "1.4.5",
+    "superagent": "1.7.2",
     "superagent-retry": "0.5.1",
     "timequeue": "0.2.2",
     "winston": "^2.1.1"
   },
   "devDependencies": {
-    "bower": "1.7.2",
+    "bower": "1.7.7",
     "connect-livereload": "0.5.4",
     "grunt": "0.4.5",
     "grunt-autoprefixer": "3.0.3",
@@ -99,7 +100,7 @@
     "karma-jasmine": "0.3.6",
     "karma-ng-html2js-preprocessor": "0.2.0",
     "karma-ng-scenario": "0.1.0",
-    "karma-phantomjs-launcher": "0.2.3",
+    "karma-phantomjs-launcher": "1.0.0",
     "karma-requirejs": "0.2.3",
     "karma-script-launcher": "0.1.0",
     "load-grunt-tasks": "3.4.0",
@@ -107,6 +108,6 @@
     "time-grunt": "1.3.0"
   },
   "engines": {
-    "node": ">=5.4.0"
+    "node": ">=5.5.0"
   }
 }

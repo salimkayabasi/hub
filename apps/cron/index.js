@@ -2,6 +2,7 @@ var cron = require('cron');
 var config = require('config');
 var tasksPath = process.cwd() + '/apps/cron/tasks';
 var tasks = require('../../libs/controller/')(tasksPath);
+var log = require('../../libs/log/')(module);
 
 var newCron = function (task, cronTime) {
   new cron.CronJob({
