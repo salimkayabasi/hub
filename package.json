@@ -3,7 +3,10 @@
   "description": "APIs for everything GDG",
   "homepage": "http://hub.gdgx.io",
   "license": "Apache-2.0",
-  "main": "server.js",
+  "scripts": {
+    "main": "./node_modules/.bin/forever -m 5 server.js",
+    "postinstall": "./node_modules/.bin/gulp"
+  },
   "keywords": [
     "gdg",
     "hub",
@@ -35,6 +38,7 @@
     "google-auth-library": "^0.9.7",
     "google-oauth-jwt": "0.2.0",
     "googleapis": "2.1.7",
+    "gulp": "^3.9.0",
     "lodash": "4.0.1",
     "moment": "2.11.1",
     "mongoose": "4.3.7",

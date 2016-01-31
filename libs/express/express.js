@@ -16,7 +16,7 @@ var cwd = process.cwd();
 var mongoStore = require('connect-mongo')(session);
 
 exports.init = function (app, cb) {
-  app.set('views', cwd + '/apps/api/views');
+  app.set('views', cwd + '/app/views');
   app.engine('html', require('ejs').renderFile);
   app.set('view engine', 'html');
   app.set('x-powered-by', false);

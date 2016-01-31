@@ -3,9 +3,9 @@ var config = require('config');
 var express = require('express');
 var app = express();
 
-var log = require('../../libs/log/')(module);
-var expressUtil = require('../../libs/express/');
-var passportUtil = require('../../libs/passport/');
+var log = require('../libs/log/index')(module);
+var expressUtil = require('../libs/express/index');
+var passportUtil = require('../libs/passport/index');
 
 exports.init = function (cb) {
   async.seq(

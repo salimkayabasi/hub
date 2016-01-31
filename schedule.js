@@ -4,21 +4,20 @@ var mongooseUtil = require('./libs/mongoose/');
 
 var server = function (done) {
   mongooseUtil.init(function () {
-    require('./app')
+    require('./cron')
       .init(function (app) {
         if (done) {
           done(null, app);
         }
       });
-
   });
 };
 
 if (require.main === module) {
-  log.info('server is started in standalone mode');
+  log.info('cron app is started in standalone mode');
   server();
 } else {
-  log.info('server is started for testing');
+  log.info('cron app is started for testing');
   module.exports = server;
 }
 

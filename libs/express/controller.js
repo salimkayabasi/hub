@@ -1,5 +1,5 @@
-var controllersPath = process.cwd() + '/apps/api/controllers';
-var apiPath = process.cwd() + '/apps/api/controllers/api/';
+var controllersPath = process.cwd() + '/app/controllers';
+var apiPath = process.cwd() + '/app/controllers/api/';
 
 var controllerUtil = require('../controller/controller');
 

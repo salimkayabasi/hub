@@ -12,14 +12,12 @@ module.exports = {
   },
   app: {
     api: {
-      enabled: process.env.API_ENABLED,
       apiV1PreFix: '/api/v1',
       apiV2PreFix: '/api/2',
       port: process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000,
       hostname: process.env.OPENSHIFT_NODEJS_IP
     },
     cron: {
-      enabled: process.env.CRON_ENABLED,
       dailyTime: '00 00 00 * * *',
       hourlyTime: '00 00 * * * *',
       every5MinTime: '00 */5 * * * *',
